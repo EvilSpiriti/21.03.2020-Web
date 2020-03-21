@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+</head>
+<body>
+    <h1>Задача 1</h1>
+    <form name="my">
+        <label>Ваше имя:</label>
+        <input id = "name" type="text" name="inp1" value="Сергей"><br>
+        <label>Ваша фамилия:</label>
+        <input id = "fmail" type="text" name="inp2" value="Петров"><br>
+        <button id = "butt" type="submit" name="ok">Ok</button>
+        <div id="str"></div>
+    </form>
+    <script>
+        butt.onclick = function() {
+        var val = document.getElementById("name").value;
+        var vol = document.getElementById("fmail").value;
+        alert(val + " " + vol);
+        // 1)
+        let selectedOption = genres.options[genres.selectedIndex];
+        alert( selectedOption.value );
+     
+		//document.getElementById("str").innerHTML=val + " " + vol;
+};
+    </script>
+
+<select id="genres">
+    <option value="Красный">Красный</option>
+    <option value="Синий" selected>Синий</option>
+  </select>
+<script>
+    let selectedOption = genres.options[genres.selectedIndex];
+  // 2)
+  let newOption = new Option("Зеленый", "Зеленый");
+  genres.append(newOption);
+  // 3)
+ // newOption.selected = true;
+ document.getElementById('genres').value= "Красный";//По заданию не очень понятно, на счет смены местами
+ //я это понял как, до этого был выбран зеленый по умолчанию и нужно сделать чтоб стал красный
+ let option = document.querySelector("option[value=Красный]");
+if (option) {
+    option.remove();
+}
+</script>
+
+<h1>Задача 3</h1>
+<div id="view" class="view">Текст</div>
+
+  <script>
+    let area = null;
+    let view = document.getElementById('view');
+
+    view.onclick = function() {
+      editStart();
+    };
+
+    function editStart() {
+      area = document.createElement('textarea');
+      area.className = 'edit';
+      area.value = view.innerHTML;
+
+      area.onkeydown = function(event) {
+        if (event.key == 'Enter') {
+          this.blur();
+        }
+      };
+
+      area.onblur = function() {
+        editEnd();
+      };
+
+      view.replaceWith(area);
+      area.focus();
+    }
+
+    function editEnd() {
+      view.innerHTML = area.value;
+      area.replaceWith(view);
+    }
+  </script>
+
+
+<h1>Задача 4</h1>
+<form id="forms">
+    <input type="text" name="name" value="Имя"><br>
+    <input type="text" name="surname" value="Фамилия">
+  </form>
+  
+  <style> .focused { outline: 1px solid red; } </style>
+  
+  <script>
+    // установить обработчик на фазе перехвата (последний аргумент true)
+    forms.addEventListener("focus", () => forms.classList.add('focused'), true);
+    forms.addEventListener("blur", () => forms.classList.remove('focused'), true);
+  </script>
+
+  <br>
+
+
+  <form id="reg">
+    <input type="email" name="E-mail" value="14052001lvv@gmail.com"><br>
+    <input type="password" name="pas" value="Rimolet14">
+  </form>
+  
+  <style> .focuseds { outline: 1px solid red; } </style>
+  
+  <script>
+    // установить обработчик на фазе перехвата (последний аргумент true)
+    reg.addEventListener("focus", () => reg.classList.add('focuseds'), true);
+    reg.addEventListener("blur", () => reg.classList.remove('focuseds'), true);
+  </script>
+<h1>Задача 5</h1>
+
+<form name = "diagr">
+            <label for="left">Левый</label><input type="checkbox" name="left" value="10" id="left">
+            <label for="right">Правый</label><input type="checkbox" name="right" value="20" id="right">
+            <br>
+            <label for="scale">Масштаб</label>
+            <select name="scales" id="scales">
+                <option value="10">10%</option>
+                <option value="50">50%</option>
+                <option value="100">100%</option>
+            </select>
+        </form>
+        <br>
+        <div style="position:relative; border: 1px black solid; height: 100px; width: 80px;
+        padding-left: 20px;">
+        <div id="d_left" style="width: 20px; height: 50px; background-color: red; 
+        position:absolute; bottom:0; left:10;"></div>
+        <div id="d_right" style="width: 20px; height: 100px; background-color:blue; 
+         position:absolute; bottom:0; left:50; margin-left: 30px;"></div>
+        </div>
+
+        <script>
+            let form = document.forms.diagr;
+
+            form.scales.onchange = calculate;
+            
+            
+            function calculate(){
+                var proz = form.scales.value * 0.01;
+                if(document.getElementById("left").checked){
+                    document.getElementById('d_left').style.height = 100*proz + "px";
+                }
+                if(document.getElementById("right").checked){
+                    document.getElementById('d_right').style.height = 100*proz + "px";
+                }
+                calculate();
+            }
+            
+        </script>
+
+
+<h1>Задача 6</h1>
+
+<form onsubmit="alert('Карта: ' + document.getElementById('card').value + ' ' + 'Сумма: ' + document.getElementById('sum').value);return false">
+    <!--Первый пример: нажмите Enter: <input id = "pri" type="text" value="Текст"><br>
+    Второй пример: нажмите на кнопку "Отправить": <input type="submit" value="Отправить">-->
+    <label>Карта</label>
+    <input id = "card" type="text" name="card" value="2234 4545 5645 4545"><br>
+    <label>Сумма</label>
+    <input id = "sum" type="text" name="sum" value="1000"><br>
+    <input type="submit" value="Отправить">
+  </form>
+
+</body>
+</html>
